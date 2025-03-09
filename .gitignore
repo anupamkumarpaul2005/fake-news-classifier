@@ -1,0 +1,24 @@
+# Ignore datasets
+dataset/raw/*
+dataset/processed/*
+*.csv
+
+# Ignore trained models
+models/*
+*.h5
+
+# Ignore environment files
+*.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Ignore API keys or sensitive config files
+.env
+config.json
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Hugging Face cache (if using `datasets` library)
+~/.cache/huggingface/
