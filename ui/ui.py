@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # FastAPI backend URL
-FASTAPI_URL = "http://127.0.0.1:8000/predict"
+FASTAPI_URL = "http://fastapi:8000/predict"
 st.set_page_config(
     page_title="Fake News Detector",
     page_icon="📰"

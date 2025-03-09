@@ -2,13 +2,16 @@ from fastapi import FastAPI
 import uvicorn
 import pickle
 import re
+import os
 import tensorflow as tf
 from pydantic import BaseModel
-from keras.preprocessing.sequence import pad_sequences
+from keras.preprocessing.sequence import pad_sequences # type: ignore
 
 # Load AI Model & Tokenizer
-model = tf.keras.models.load_model("C:\DRIVE\ML\Fake News\models\lstm_model.h5")
-with open("C:\DRIVE\ML\Fake News\models\\tokenizer.pkl", "rb") as f:
+MODEL_PATH = os.path.join(os.getcwd(), "models/lstm_model.h5")
+TOKENIZER_PATH = os.path.join(os.getcwd(), "models/tokenizer.pkl")
+model = tf.keras.models.load_model(MODEL_PATH)
+with open(TOKENIZER_PATH, "rb") as f:
     tokenizer = pickle.load(f)
 
 # Base Model of the Input

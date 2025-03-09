@@ -1,0 +1,12 @@
+services:
+    fastapi:
+        build: ./api
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./models:/app/models
+    
+    streamlit:
+        build: ./ui
+        ports:
+            - "8501:8501"
