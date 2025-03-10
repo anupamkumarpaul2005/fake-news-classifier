@@ -2,14 +2,29 @@ from fastapi import FastAPI
 import uvicorn
 import pickle
 import re
-import os
 import tensorflow as tf
+from huggingface_hub import hf_hub_download
 from pydantic import BaseModel
 from keras.preprocessing.sequence import pad_sequences # type: ignore
+import os
+import time
 
+
+REPO_ID = "Yoppsoic/fake-news-lstm-model"
 # Load AI Model & Tokenizer
+'''
 MODEL_PATH = os.path.join(os.getcwd(), "models/lstm_model.h5")
 TOKENIZER_PATH = os.path.join(os.getcwd(), "models/tokenizer.pkl")
+'''
+
+os.makedirs("/app/models", exist_ok=True)
+
+# Loading the models from hugging face which we uploaded using "../hf_upload.py"
+print("Downloading model from Hugging Face...")
+start_time = time.time()
+MODEL_PATH = hf_hub_download(repo_id=REPO_ID, filename="lstm_model.h5", cache_dir="/app/models")
+TOKENIZER_PATH = hf_hub_download(repo_id=REPO_ID, filename="tokenizer.pkl", cache_dir="/app/models")
+print(f"✅ Model downloaded in {time.time() - start_time:.2f} seconds!")
 model = tf.keras.models.load_model(MODEL_PATH)
 with open(TOKENIZER_PATH, "rb") as f:
     tokenizer = pickle.load(f)
